@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/stockQuoteRow"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+        <TextView
+            android:id="@+id/stockListTickerView"
+            style="@style/StockListTextStyle"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/empty_value" />
+		<TextView
+            android:id="@+id/stockListPriceView"
+            android:layout_weight="1"
+            android:text="@string/empty_value"
+            style="@style/StockListNumberStyle"/>
+		<TextView
+			android:id="@+id/stockListPctChangeView"
+            android:layout_weight="1"
+            android:text="@string/empty_value"
+            style="@style/StockListNumberStyle"/>
+		<TextView
+            android:layout_weight="1"
+            android:id="@+id/stockListDayHighView"
+            android:text="@string/empty_value"
+            style="@style/StockListNumberStyle"/>
+		<TextView
+            android:layout_weight="1"
+            android:id="@+id/stockListDayLowView"
+            android:text="@string/empty_value"
+            style="@style/StockListNumberStyle"/>
+		<TextView
+            android:layout_weight="1"
+            android:id="@+id/stockListYearHighView"
+            android:text="@string/empty_value"
+            style="@style/StockListNumberStyle"/>
+		<TextView
+            android:layout_weight="1"
+            android:id="@+id/stockListYearLowView"
+            android:text="@string/empty_value"
+            style="@style/StockListNumberStyle"/>
+		<TextView
+            android:layout_weight="1"
+            android:id="@+id/stockListCompanyView"
+            android:text="@string/empty_value"
+            android:singleLine="true"
+            android:ellipsize="end"
+            style="@style/HeaderCompanyTextStyle"/>
+</LinearLayout>

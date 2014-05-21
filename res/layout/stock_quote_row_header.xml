@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/stockQuoteRowHeader"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+        <TextView
+            android:id="@+id/stockListTickerViewHeader"
+            style="@style/HeaderTextStyle"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/ticker" />
+
+		<TextView
+            android:id="@+id/stockListPriceViewHeader"
+            android:layout_weight="1"
+            android:text="@string/price"
+            style="@style/HeaderNumberStyle"/>
+		<TextView
+			android:id="@+id/stockListPctChangeViewHeader"
+            android:layout_weight="1"
+            android:text="@string/pct_change"
+            style="@style/HeaderNumberStyle"/>
+		<TextView
+            android:layout_weight="1"
+            android:id="@+id/stockListDayHighViewHeader"
+            android:text="@string/day_high"
+            style="@style/HeaderNumberStyle"/>
+		<TextView
+            android:layout_weight="1"
+            android:id="@+id/stockListDayLowViewHeader"
+            android:text="@string/day_low"
+            style="@style/HeaderNumberStyle"/>
+		<TextView
+            android:layout_weight="1"
+            android:id="@+id/stockListYearHighViewHeader"
+            android:text="@string/year_high"
+            style="@style/HeaderNumberStyle"/>
+		<TextView
+            android:layout_weight="1"
+            android:id="@+id/stockListYearLowViewHeader"
+            android:text="@string/year_low"
+            style="@style/HeaderNumberStyle"/>
+		<TextView
+            android:layout_weight="1"
+            android:id="@+id/stockListCompanyViewHeader"
+            android:text="@string/company_name"
+            android:singleLine="true"
+            android:ellipsize="end"
+            style="@style/HeaderCompanyTextStyle"/>
+</LinearLayout>
