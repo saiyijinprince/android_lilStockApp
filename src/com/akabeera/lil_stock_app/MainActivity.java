@@ -66,7 +66,6 @@ public class MainActivity extends ActionBarActivity {
         stockSymbolsEntered = getSharedPreferences("stockList", MODE_PRIVATE);
         
         // Initialize Components
-        //stockTableScrollView = (TableLayout) findViewById(R.id.stockTableScrollView);
         stockSymbolEditText = (EditText) findViewById(R.id.stockSymbolEditText);
         enterStockSymbolButton = (Button) findViewById(R.id.enterStockSymbolButton);
         deleteStocksButton = (Button) findViewById(R.id.deleteStocksButton);
