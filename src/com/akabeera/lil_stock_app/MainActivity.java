@@ -12,9 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
@@ -240,21 +239,21 @@ public class MainActivity extends ActionBarActivity {
                 String inputStr;
                 while ((inputStr = streamReader.readLine()) != null)
                     responseStrBuilder.append(inputStr);
-                JSONObject jsonObj = new JSONObject(responseStrBuilder.toString());
-                JSONObject query = jsonObj.getJSONObject(KEY_QUERY);
-                JSONObject results = query.getJSONObject(KEY_RESULTS);
-                int count = query.getInt(KEY_COUNT);
+                JsonObject jsonObj = JsonObject.readFrom(responseStrBuilder.toString());
+                JsonObject query = jsonObj.get(KEY_QUERY).asObject();
+                JsonObject results = query.get(KEY_RESULTS).asObject();
+                int count = query.get(KEY_COUNT).asInt();
                 
                 TempStockInfoList.clear();
                 if (count > 1){
-                    JSONArray quote = results.getJSONArray(KEY_QUOTE);    
-                    for (int i=0; i<quote.length(); ++i){
-                        JSONObject info = quote.getJSONObject(i);
+                    JsonArray quote = results.get(KEY_QUOTE).asArray();    
+                    for (int i=0; i<quote.size(); ++i){
+                        JsonObject info = quote.get(i).asObject();
                         StockInfo stockInfo = ParseStockInfoJson(info);
                         TempStockInfoList.add(stockInfo);
                     }
                 } else {
-                    JSONObject quote = results.getJSONObject(KEY_QUOTE);    
+                    JsonObject quote = results.get(KEY_QUOTE).asObject();    
                     StockInfo stockInfo = ParseStockInfoJson(quote);
                     TempStockInfoList.add(stockInfo);
                 }
@@ -263,13 +262,11 @@ public class MainActivity extends ActionBarActivity {
                 Log.d(TAG, "MalformedURLException", e);             
             } catch (IOException e) {
                 Log.d(TAG, "IOException", e);
-            } catch (JSONException e) {
-                Log.d(TAG, "JSONException", e);
             } finally {}
             return null;
         }
         
-        private StockInfo ParseStockInfoJson(JSONObject info){
+        private StockInfo ParseStockInfoJson(JsonObject info){
             String symbol = "";
             String name = "";
             String yearLow = "";
@@ -280,17 +277,17 @@ public class MainActivity extends ActionBarActivity {
             String change = "";
             String daysRange = "";
             
-            try {
-                symbol = info.getString(KEY_SYMBOL);
-                name = info.getString(KEY_NAME);
+            
+                symbol = info.get(KEY_SYMBOL).asString();
+                name = info.get(KEY_NAME).asString();
 
-                if (info.getString(KEY_CHANGE) != "null"){
-                    change = info.getString(KEY_CHANGE);
-                    yearLow = info.getString(KEY_YEAR_LOW);
-                    yearHigh = info.getString(KEY_YEAR_HIGH);
-                    daysLow = info.getString(KEY_DAYS_LOW);
-                    daysHigh = info.getString(KEY_DAYS_HIGH);
-                    lastTradePriceOnly = info.getString(KEY_LAST_TRADE_PRICE);
+                if (info.get(KEY_CHANGE).asString() != "null"){
+                    change = info.get(KEY_CHANGE).asString();
+                    yearLow = info.get(KEY_YEAR_LOW).asString();
+                    yearHigh = info.get(KEY_YEAR_HIGH).asString();
+                    daysLow = info.get(KEY_DAYS_LOW).asString();
+                    daysHigh = info.get(KEY_DAYS_HIGH).asString();
+                    lastTradePriceOnly = info.get(KEY_LAST_TRADE_PRICE).asString();
                 } else {
                     String empty_stub = getString(R.string.empty_value);
                     change =  "0";
@@ -301,10 +298,6 @@ public class MainActivity extends ActionBarActivity {
                     lastTradePriceOnly = empty_stub;
                 }
                 
-            } catch (JSONException e) {
-                Log.d(TAG, "JSONException", e);
-            }
-            
             StockInfo stockInfo = new StockInfo(symbol, daysLow, daysHigh, yearLow, yearHigh,
                     name, lastTradePriceOnly, change, daysRange);
             
