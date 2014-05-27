@@ -164,7 +164,7 @@ public class MainActivity extends ActionBarActivity {
         for(String s:stocksList){
             String isTheStockNew = stockSymbolsEntered.getString(s, null);
 
-            if (isTheStockNew == null   && !s.isEmpty()){
+            if (isTheStockNew == null  && isValidTicker(s)){
                 SharedPreferences.Editor preferencesEditor = stockSymbolsEntered.edit();
                 preferencesEditor.putString(s, s);
                 preferencesEditor.apply();
@@ -172,6 +172,21 @@ public class MainActivity extends ActionBarActivity {
         }
         
         updateSavedStockList();
+    }
+    
+    private boolean isValidTicker(String ticker){
+        if (ticker.isEmpty())
+            return false;
+        
+        for (int i=0; i<ticker.length(); ++i){
+            char c = ticker.charAt(i);
+            if (!((c > 'A' && c < 'Z') || 
+                 (c > 'a' && c < 'z') ||
+                 (c >= '0' && c <= '9')))
+                return false;
+        }
+        
+        return true;
     }
     
     private void updateSavedStockList(){
