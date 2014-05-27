@@ -10,6 +10,8 @@
             style="@style/StockListTextStyle"
             android:layout_width="fill_parent"
             android:layout_weight="1"
+			android:singleLine="true"
+            android:ellipsize="end"
             android:text="@string/empty_value" />
 		<TextView
             android:id="@+id/stockListPriceView"

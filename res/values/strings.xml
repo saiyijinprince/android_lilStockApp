@@ -23,4 +23,9 @@
     <string name="year_low">Yr Low</string>
     <string name="company_name">Company</string>
     <string name="empty_value">--</string>
+    <string name="refresh">refresh</string>
+    <string name="title_activity_stock_info_list">StockInfoListActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="format_example">Input Format: ticker1[,ticker2,ticker3&#8230;]</string>
+
 </resources>

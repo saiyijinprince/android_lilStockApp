@@ -10,13 +10,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -25,17 +25,16 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -56,6 +55,7 @@ public class MainActivity extends ActionBarActivity {
     
     Button enterStockSymbolButton;
     Button deleteStocksButton;
+    ImageButton refreshButton;
     
     private ProgressBar fetchProgress;
 
@@ -72,11 +72,13 @@ public class MainActivity extends ActionBarActivity {
         enterStockSymbolButton = (Button) findViewById(R.id.enterStockSymbolButton);
         deleteStocksButton = (Button) findViewById(R.id.deleteStocksButton);
         fetchProgress = (ProgressBar) findViewById(R.id.fetchProgressBar);
+        refreshButton = (ImageButton) findViewById(R.id.refreshButton);
         fetchProgress.setVisibility(View.GONE);
         
         // Add ClickListeners to the buttons
         enterStockSymbolButton.setOnClickListener(enterStockButtonListener);
         deleteStocksButton.setOnClickListener(deleteStocksButtonListener);
+        refreshButton.setOnClickListener(refreshButtonListener);
         
         StockInfoList =  new ArrayList<StockInfo>();
         TempStockInfoList =  new ArrayList<StockInfo>();
@@ -104,7 +106,6 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         
-        // Add saved stocks to the Stock Scrollview
         updateSavedStockList();
     }
 
@@ -150,15 +151,28 @@ public class MainActivity extends ActionBarActivity {
         }
     };
     
-    private void saveStockSymbol(String newStock){
-        String isTheStockNew = stockSymbolsEntered.getString(newStock, null);
+    public OnClickListener refreshButtonListener = new OnClickListener() {
 
-        if (isTheStockNew == null){
-            SharedPreferences.Editor preferencesEditor = stockSymbolsEntered.edit();
-            preferencesEditor.putString(newStock, newStock);
-            preferencesEditor.apply();
+        @Override
+        public void onClick(View v) {
             updateSavedStockList();
         }
+    };
+    
+    private void saveStockSymbol(String newStock){
+        List<String> stocksList = new ArrayList<String>(Arrays.asList(newStock.split(",")));
+        
+        for(String s:stocksList){
+            String isTheStockNew = stockSymbolsEntered.getString(s, null);
+
+            if (isTheStockNew == null   && !s.isEmpty()){
+                SharedPreferences.Editor preferencesEditor = stockSymbolsEntered.edit();
+                preferencesEditor.putString(s, s);
+                preferencesEditor.apply();
+            }
+        }
+        
+        updateSavedStockList();
     }
     
     private void updateSavedStockList(){
@@ -231,49 +245,17 @@ public class MainActivity extends ActionBarActivity {
                 JSONObject results = query.getJSONObject(KEY_RESULTS);
                 int count = query.getInt(KEY_COUNT);
                 
-                String symbol = "";
-                String name = "";
-                String yearLow = "";
-                String yearHigh = "";
-                String daysLow = "";
-                String daysHigh = "";
-                String lastTradePriceOnly = "";
-                String change = "";
-                String daysRange = "";
                 TempStockInfoList.clear();
                 if (count > 1){
                     JSONArray quote = results.getJSONArray(KEY_QUOTE);    
                     for (int i=0; i<quote.length(); ++i){
                         JSONObject info = quote.getJSONObject(i);
-                        name = info.getString(KEY_NAME);
-                        yearLow = info.getString(KEY_YEAR_LOW);
-                        yearHigh = info.getString(KEY_YEAR_HIGH);
-                        daysLow = info.getString(KEY_DAYS_LOW);
-                        daysHigh = info.getString(KEY_DAYS_HIGH);
-                        lastTradePriceOnly = info.getString(KEY_LAST_TRADE_PRICE);
-                        change = info.getString(KEY_CHANGE);
-                        daysRange = info.getString(KEY_DAYS_RANGE);
-                        symbol = info.getString(KEY_SYMBOL);
-                        
-                        StockInfo stockInfo = new StockInfo(symbol, daysLow, daysHigh, yearLow, yearHigh,
-                                name, lastTradePriceOnly, change, daysRange);
+                        StockInfo stockInfo = ParseStockInfoJson(info);
                         TempStockInfoList.add(stockInfo);
                     }
                 } else {
-                    JSONObject quote = results.getJSONObject(KEY_QUOTE);
-                    name = quote.getString(KEY_NAME);
-                    yearLow = quote.getString(KEY_YEAR_LOW);
-                    yearHigh = quote.getString(KEY_YEAR_HIGH);
-                    daysLow = quote.getString(KEY_DAYS_LOW);
-                    daysHigh = quote.getString(KEY_DAYS_HIGH);
-                    lastTradePriceOnly = quote.getString(KEY_LAST_TRADE_PRICE);
-                    change = quote.getString(KEY_CHANGE);
-                    daysRange = quote.getString(KEY_DAYS_RANGE);
-                    symbol = quote.getString(KEY_SYMBOL);
-                    
-                    StockInfo stockInfo = new StockInfo(symbol, daysLow, daysHigh, yearLow, yearHigh,
-                            name, lastTradePriceOnly, change, daysRange);
-                    //StockInfoList.put(symbol, stockInfo);
+                    JSONObject quote = results.getJSONObject(KEY_QUOTE);    
+                    StockInfo stockInfo = ParseStockInfoJson(quote);
                     TempStockInfoList.add(stockInfo);
                 }
                 
@@ -285,6 +267,48 @@ public class MainActivity extends ActionBarActivity {
                 Log.d(TAG, "JSONException", e);
             } finally {}
             return null;
+        }
+        
+        private StockInfo ParseStockInfoJson(JSONObject info){
+            String symbol = "";
+            String name = "";
+            String yearLow = "";
+            String yearHigh = "";
+            String daysLow = "";
+            String daysHigh = "";
+            String lastTradePriceOnly = "";
+            String change = "";
+            String daysRange = "";
+            
+            try {
+                symbol = info.getString(KEY_SYMBOL);
+                name = info.getString(KEY_NAME);
+
+                if (info.getString(KEY_CHANGE) != "null"){
+                    change = info.getString(KEY_CHANGE);
+                    yearLow = info.getString(KEY_YEAR_LOW);
+                    yearHigh = info.getString(KEY_YEAR_HIGH);
+                    daysLow = info.getString(KEY_DAYS_LOW);
+                    daysHigh = info.getString(KEY_DAYS_HIGH);
+                    lastTradePriceOnly = info.getString(KEY_LAST_TRADE_PRICE);
+                } else {
+                    String empty_stub = getString(R.string.empty_value);
+                    change =  "0";
+                    yearLow = empty_stub;
+                    yearHigh = empty_stub;
+                    daysLow = empty_stub;
+                    daysHigh = empty_stub;
+                    lastTradePriceOnly = empty_stub;
+                }
+                
+            } catch (JSONException e) {
+                Log.d(TAG, "JSONException", e);
+            }
+            
+            StockInfo stockInfo = new StockInfo(symbol, daysLow, daysHigh, yearLow, yearHigh,
+                    name, lastTradePriceOnly, change, daysRange);
+            
+            return stockInfo;
         }
         
         protected void onPostExecute(String result){
@@ -304,21 +328,5 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
     }
 }

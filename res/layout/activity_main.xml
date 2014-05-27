@@ -1,6 +1,7 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/TableLayout1"
+    style="@style/FormatTextStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
@@ -43,7 +44,17 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/white"
+            android:layout_marginRight="5dp"
             android:text="@string/enter_stock_symbol" />
+        
+        <ImageButton 
+            android:id="@+id/refreshButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_refresh"
+            android:contentDescription="@string/refresh"
+            android:background="@color/white"
+            android:scaleType="fitCenter"/>
 
         <ProgressBar
             android:id="@+id/fetchProgressBar"
@@ -51,8 +62,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical" />
-
     </TableRow>
+
+    <TextView
+        android:id="@+id/FormattextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/format_example"
+        style="@style/FormatTextStyle" />
     
     <ListView 
         android:id="@+id/listViewId"            

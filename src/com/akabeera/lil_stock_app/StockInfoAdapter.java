@@ -13,6 +13,17 @@ public class StockInfoAdapter extends ArrayAdapter<StockInfo> {
     
     private Context context;
     
+    static class ViewHolder {
+        public TextView tickerView;
+        public TextView priceView;
+        public TextView pctChangeView;
+        public TextView dyHighView;
+        public TextView dyLowView;
+        public TextView yrHighView;
+        public TextView yrLowView;
+        public TextView companyView;
+    }
+    
     public StockInfoAdapter(Context context, ArrayList<StockInfo> stocks){
         super(context, R.layout.stock_quote_row);
         
@@ -24,43 +35,50 @@ public class StockInfoAdapter extends ArrayAdapter<StockInfo> {
         StockInfo si = getItem(position);
         if (convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.stock_quote_row, parent, false);
+            //configure view holder
+            ViewHolder viewHolder = new ViewHolder();
+            viewHolder.tickerView = (TextView) convertView.findViewById(R.id.stockListTickerView);
+            viewHolder.priceView = (TextView) convertView.findViewById(R.id.stockListPriceView);
+            viewHolder.pctChangeView = (TextView) convertView.findViewById(R.id.stockListPctChangeView);
+            viewHolder.dyHighView = (TextView) convertView.findViewById(R.id.stockListDayHighView);
+            viewHolder.dyLowView = (TextView) convertView.findViewById(R.id.stockListDayLowView);
+            viewHolder.yrHighView = (TextView) convertView.findViewById(R.id.stockListYearHighView);            
+            viewHolder.yrLowView = (TextView) convertView.findViewById(R.id.stockListYearLowView);
+            viewHolder.companyView = (TextView) convertView.findViewById(R.id.stockListCompanyView);            
+            convertView.setTag(viewHolder);
         }
         
         double priceChange = Double.parseDouble(si.getChange());
         int c = 0;
+        
         if (priceChange < 0)
             c = context.getResources().getColor(R.color.negative);
+        else if (priceChange == 0)
+            c = context.getResources().getColor(R.color.white);
         else c = context.getResources().getColor(R.color.positive);
         
-        TextView tickerView = (TextView) convertView.findViewById(R.id.stockListTickerView);
-        tickerView.setText(si.getTicker());
+        ViewHolder holder = (ViewHolder) convertView.getTag();
+        holder.tickerView.setText(si.getTicker());
+
+        holder.priceView.setText(si.getLastTradePriceOnly());
+        holder.priceView.setTextColor(c);
         
-        TextView priceView = (TextView) convertView.findViewById(R.id.stockListPriceView);
-        priceView.setText(si.getLastTradePriceOnly());
-        priceView.setTextColor(c);
+        holder.pctChangeView.setText(si.getChange());
+        holder.pctChangeView.setTextColor(c);
         
-        TextView pctChangeView = (TextView) convertView.findViewById(R.id.stockListPctChangeView);
-        pctChangeView.setText(si.getChange());
-        pctChangeView.setTextColor(c);
+        holder.dyHighView.setText(si.getDaysHigh());
+        holder.dyHighView.setTextColor(c);
+
+        holder.dyLowView.setText(si.getDaysHigh());
+        holder.dyLowView.setTextColor(c);
         
-        TextView dyHighView = (TextView) convertView.findViewById(R.id.stockListDayHighView);
-        dyHighView.setText(si.getDaysHigh());
-        dyHighView.setTextColor(c);
+        holder.yrHighView.setText(si.getYearHigh());
+        holder.yrHighView.setTextColor(c);
         
-        TextView dyLowView = (TextView) convertView.findViewById(R.id.stockListDayLowView);
-        dyLowView.setText(si.getDaysHigh());
-        dyLowView.setTextColor(c);
+        holder.yrLowView.setText(si.getYearLow());
+        holder.yrLowView.setTextColor(c);
         
-        TextView yrHighView = (TextView) convertView.findViewById(R.id.stockListYearHighView);
-        yrHighView.setText(si.getYearHigh());
-        yrHighView.setTextColor(c);
-        
-        TextView yrLowView = (TextView) convertView.findViewById(R.id.stockListYearLowView);
-        yrLowView.setText(si.getYearLow());
-        yrLowView.setTextColor(c);
-        
-        TextView companyView = (TextView) convertView.findViewById(R.id.stockListCompanyView);
-        companyView.setText(si.getName());
+        holder.companyView.setText(si.getName());
         
         return convertView;
     }

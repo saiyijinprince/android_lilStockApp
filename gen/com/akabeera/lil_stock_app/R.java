@@ -896,6 +896,7 @@ containing a value of this type.
          */
         public static final int activity_horizontal_margin=0x7f080010;
         public static final int activity_vertical_margin=0x7f080011;
+        public static final int small_text_size=0x7f080013;
         public static final int stock_list_text_size=0x7f080012;
     }
     public static final class drawable {
@@ -986,9 +987,11 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020054;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
-        public static final int ic_launcher=0x7f020057;
+        public static final int ic_action_refresh=0x7f020057;
+        public static final int ic_launcher=0x7f020058;
     }
     public static final class id {
+        public static final int FormattextView=0x7f050049;
         public static final int TableLayout1=0x7f050042;
         public static final int action_bar=0x7f05001a;
         public static final int action_bar_activity_content=0x7f050015;
@@ -1003,14 +1006,14 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f05002f;
         public static final int action_mode_bar_stub=0x7f05002e;
         public static final int action_mode_close_button=0x7f050022;
-        public static final int action_settings=0x7f05005d;
+        public static final int action_settings=0x7f05005f;
         public static final int activity_chooser_view_content=0x7f050023;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
         public static final int checkbox=0x7f05002b;
         public static final int collapseActionView=0x7f05000d;
         public static final int default_activity_button=0x7f050026;
-        public static final int deleteStocksButton=0x7f05004a;
+        public static final int deleteStocksButton=0x7f05004c;
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
         public static final int dropdown=0x7f05000f;
@@ -1020,7 +1023,7 @@ containing a value of this type.
         public static final int enterSymbolTextView=0x7f050044;
         public static final int expand_activities_button=0x7f050024;
         public static final int expanded_menu=0x7f05002a;
-        public static final int fetchProgressBar=0x7f050047;
+        public static final int fetchProgressBar=0x7f050048;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f050028;
@@ -1028,7 +1031,7 @@ containing a value of this type.
         public static final int image=0x7f050025;
         public static final int left_icon=0x7f050031;
         public static final int listMode=0x7f050001;
-        public static final int listViewId=0x7f050048;
+        public static final int listViewId=0x7f05004a;
         public static final int list_item=0x7f050027;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
@@ -1037,6 +1040,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f050034;
         public static final int progress_horizontal=0x7f050035;
         public static final int radio=0x7f05002d;
+        public static final int refreshButton=0x7f050047;
         public static final int right_container=0x7f050032;
         public static final int right_icon=0x7f050033;
         public static final int search_badge=0x7f050038;
@@ -1054,29 +1058,29 @@ containing a value of this type.
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
         public static final int split_action_bar=0x7f05001c;
-        public static final int stockListCompanyView=0x7f050053;
-        public static final int stockListCompanyViewHeader=0x7f05005c;
-        public static final int stockListDayHighView=0x7f05004f;
-        public static final int stockListDayHighViewHeader=0x7f050058;
-        public static final int stockListDayLowView=0x7f050050;
-        public static final int stockListDayLowViewHeader=0x7f050059;
-        public static final int stockListPctChangeView=0x7f05004e;
-        public static final int stockListPctChangeViewHeader=0x7f050057;
-        public static final int stockListPriceView=0x7f05004d;
-        public static final int stockListPriceViewHeader=0x7f050056;
-        public static final int stockListTickerView=0x7f05004c;
-        public static final int stockListTickerViewHeader=0x7f050055;
-        public static final int stockListYearHighView=0x7f050051;
-        public static final int stockListYearHighViewHeader=0x7f05005a;
-        public static final int stockListYearLowView=0x7f050052;
-        public static final int stockListYearLowViewHeader=0x7f05005b;
-        public static final int stockQuoteRow=0x7f05004b;
-        public static final int stockQuoteRowHeader=0x7f050054;
+        public static final int stockListCompanyView=0x7f050055;
+        public static final int stockListCompanyViewHeader=0x7f05005e;
+        public static final int stockListDayHighView=0x7f050051;
+        public static final int stockListDayHighViewHeader=0x7f05005a;
+        public static final int stockListDayLowView=0x7f050052;
+        public static final int stockListDayLowViewHeader=0x7f05005b;
+        public static final int stockListPctChangeView=0x7f050050;
+        public static final int stockListPctChangeViewHeader=0x7f050059;
+        public static final int stockListPriceView=0x7f05004f;
+        public static final int stockListPriceViewHeader=0x7f050058;
+        public static final int stockListTickerView=0x7f05004e;
+        public static final int stockListTickerViewHeader=0x7f050057;
+        public static final int stockListYearHighView=0x7f050053;
+        public static final int stockListYearHighViewHeader=0x7f05005c;
+        public static final int stockListYearLowView=0x7f050054;
+        public static final int stockListYearLowViewHeader=0x7f05005d;
+        public static final int stockQuoteRow=0x7f05004d;
+        public static final int stockQuoteRowHeader=0x7f050056;
         public static final int stockSymbolEditText=0x7f050045;
         public static final int submit_area=0x7f05003f;
         public static final int tabMode=0x7f050002;
         public static final int tableRow0=0x7f050043;
-        public static final int tableRow3=0x7f050049;
+        public static final int tableRow3=0x7f05004b;
         public static final int title=0x7f050029;
         public static final int title_container=0x7f050030;
         public static final int top_action_bar=0x7f05001e;
@@ -1135,15 +1139,14 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030016;
         public static final int abc_search_view=0x7f030017;
         public static final int activity_main=0x7f030018;
-        public static final int fragment_main=0x7f030019;
-        public static final int fragment_stock_info=0x7f03001a;
-        public static final int stock_quote_row=0x7f03001b;
-        public static final int stock_quote_row_header=0x7f03001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
+        public static final int stock_quote_row=0x7f030019;
+        public static final int stock_quote_row_header=0x7f03001a;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001b;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
         public static final int stock_info=0x7f0c0001;
+        public static final int stock_info_list=0x7f0c0002;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1190,25 +1193,28 @@ containing a value of this type.
         public static final int app_name=0x7f0a000d;
         public static final int cancel=0x7f0a0013;
         public static final int change_stock_symbol=0x7f0a0011;
-        public static final int company_name=0x7f0a0022;
+        public static final int company_name=0x7f0a0021;
         public static final int confirm_action=0x7f0a0017;
-        public static final int day_high=0x7f0a001e;
-        public static final int day_low=0x7f0a001f;
+        public static final int day_high=0x7f0a001d;
+        public static final int day_low=0x7f0a001e;
         public static final int days_range=0x7f0a0019;
         public static final int delete_all_symbols=0x7f0a0016;
-        public static final int empty_value=0x7f0a0023;
+        public static final int empty_value=0x7f0a0022;
         public static final int enter_stock_symbol=0x7f0a0010;
-        public static final int hello_world=0x7f0a001a;
+        public static final int format_example=0x7f0a0026;
+        public static final int hello_world=0x7f0a0025;
         public static final int invalid_stock_symbol=0x7f0a0015;
         public static final int missing_stock_symbol=0x7f0a0014;
         public static final int ok=0x7f0a0012;
-        public static final int pct_change=0x7f0a001d;
-        public static final int price=0x7f0a001c;
+        public static final int pct_change=0x7f0a001c;
+        public static final int price=0x7f0a001b;
+        public static final int refresh=0x7f0a0023;
         public static final int stock_symbol=0x7f0a000f;
-        public static final int ticker=0x7f0a001b;
+        public static final int ticker=0x7f0a001a;
+        public static final int title_activity_stock_info_list=0x7f0a0024;
         public static final int yahoo_stock_url=0x7f0a0018;
-        public static final int year_high=0x7f0a0020;
-        public static final int year_low=0x7f0a0021;
+        public static final int year_high=0x7f0a001f;
+        public static final int year_low=0x7f0a0020;
     }
     public static final class style {
         /** 
@@ -1237,11 +1243,13 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0b0080;
-        public static final int HeaderCompanyTextStyle=0x7f0b0082;
-        public static final int HeaderNumberStyle=0x7f0b0083;
-        public static final int HeaderTextStyle=0x7f0b0081;
-        public static final int StockListNumberStyle=0x7f0b0085;
-        public static final int StockListTextStyle=0x7f0b0084;
+        public static final int BaseStyle=0x7f0b0081;
+        public static final int FormatTextStyle=0x7f0b0084;
+        public static final int HeaderCompanyTextStyle=0x7f0b0083;
+        public static final int HeaderNumberStyle=0x7f0b0085;
+        public static final int HeaderTextStyle=0x7f0b0082;
+        public static final int StockListNumberStyle=0x7f0b0087;
+        public static final int StockListTextStyle=0x7f0b0086;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f0b0061;
