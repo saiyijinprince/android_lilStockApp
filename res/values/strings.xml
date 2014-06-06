@@ -27,5 +27,9 @@
     <string name="title_activity_stock_info_list">StockInfoListActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="format_example">Input Format: ticker1[,ticker2,ticker3&#8230;]</string>
+    <string name="transaction_data_button">Add/Edit Transaction Data</string>
+    <string name="title_activity_add_edit_transaction_data">AddEditTransactionDataActivity</string>
+    <string name="shares">SHARES</string>
+    <string name="price_paid">PRICE</string>
 
 </resources>

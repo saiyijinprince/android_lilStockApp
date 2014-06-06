@@ -69,7 +69,7 @@ public class StockInfoAdapter extends ArrayAdapter<StockInfo> {
         holder.dyHighView.setText(si.getDaysHigh());
         holder.dyHighView.setTextColor(c);
 
-        holder.dyLowView.setText(si.getDaysHigh());
+        holder.dyLowView.setText(si.getDaysLow());
         holder.dyLowView.setTextColor(c);
         
         holder.yrHighView.setText(si.getYearHigh());

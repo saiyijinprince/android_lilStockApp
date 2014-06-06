@@ -13,16 +13,21 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" 
-        android:theme="@style/AppTheme">
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
         <activity
             android:name="com.akabeera.lil_stock_app.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.akabeera.lil_stock_app.AddEditTransactionDataActivity"
+            android:label="@string/title_activity_add_edit_transaction_data" 
+            android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
     </application>
+
 </manifest>

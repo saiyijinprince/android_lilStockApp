@@ -78,6 +78,15 @@
         android:layout_weight="1"> 
     </ListView>
 
+    <Button
+        android:id="@+id/transactionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="@string/transaction_data_button">
+    	<requestFocus/>    
+    </Button>
+
     <TableRow
         android:id="@+id/tableRow3"
         android:layout_width="match_parent"

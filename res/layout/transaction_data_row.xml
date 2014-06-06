@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/transactionDataRow"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+    
+    <TableRow
+		android:id="@+id/transactionTableRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+	    <TextView
+	        android:id="@+id/transactionDataTickerView"
+	        style="@style/StockListTextStyle"
+	        android:layout_width="0px"
+	        android:gravity="center"
+	        android:layout_weight="1"
+	        android:text="@string/empty_value"
+	        android:textSize="@dimen/transaction_list_text_size" />
+	
+	    <EditText
+	        android:id="@+id/NumSharesEditText"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:layout_marginLeft="3dp"
+	        android:layout_weight="3"
+	        
+	        android:hint="@string/shares"
+	        android:inputType="number" />
+
+		<EditText
+		    android:id="@+id/PriceEditText"
+		    android:layout_width="0px"
+		    android:layout_height="wrap_content"
+		    android:gravity="center"
+		    android:layout_marginLeft="3dp"
+		    android:layout_marginRight="3dp"
+		    android:layout_weight="3"
+		   
+		    android:hint="@string/price_paid"
+		    android:inputType="numberDecimal" />
+		</TableRow>
+</LinearLayout>

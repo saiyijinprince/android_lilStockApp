@@ -54,6 +54,7 @@ public class MainActivity extends ActionBarActivity {
     
     Button enterStockSymbolButton;
     Button deleteStocksButton;
+    Button AddEditTransactionsButton;
     ImageButton refreshButton;
     
     private ProgressBar fetchProgress;
@@ -69,6 +70,7 @@ public class MainActivity extends ActionBarActivity {
         stockSymbolEditText = (EditText) findViewById(R.id.stockSymbolEditText);
         enterStockSymbolButton = (Button) findViewById(R.id.enterStockSymbolButton);
         deleteStocksButton = (Button) findViewById(R.id.deleteStocksButton);
+        AddEditTransactionsButton = (Button) findViewById(R.id.transactionButton);
         fetchProgress = (ProgressBar) findViewById(R.id.fetchProgressBar);
         refreshButton = (ImageButton) findViewById(R.id.refreshButton);
         fetchProgress.setVisibility(View.GONE);
@@ -77,6 +79,7 @@ public class MainActivity extends ActionBarActivity {
         enterStockSymbolButton.setOnClickListener(enterStockButtonListener);
         deleteStocksButton.setOnClickListener(deleteStocksButtonListener);
         refreshButton.setOnClickListener(refreshButtonListener);
+        AddEditTransactionsButton.setOnClickListener(addEditTransactionButtonListener);
         
         StockInfoList =  new ArrayList<StockInfo>();
         TempStockInfoList =  new ArrayList<StockInfo>();
@@ -155,6 +158,21 @@ public class MainActivity extends ActionBarActivity {
         public void onClick(View v) {
             updateSavedStockList();
         }
+    };
+    
+    public OnClickListener addEditTransactionButtonListener = new OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            Intent myIntent = new Intent(MainActivity.this, AddEditTransactionDataActivity.class);
+            
+            String[] tickers = stockSymbolsEntered.getAll().keySet().toArray(new String[0]);
+            Arrays.sort(tickers, String.CASE_INSENSITIVE_ORDER);
+            
+            myIntent.putExtra("tickersList", tickers);
+            MainActivity.this.startActivity(myIntent);
+        }
+        
     };
     
     private void saveStockSymbol(String newStock){
@@ -291,26 +309,25 @@ public class MainActivity extends ActionBarActivity {
             String change = "";
             String daysRange = "";
             
-            
-                symbol = info.get(KEY_SYMBOL).asString();
-                name = info.get(KEY_NAME).asString();
+            symbol = info.get(KEY_SYMBOL).asString();
+            name = info.get(KEY_NAME).asString();
 
-                if (info.get(KEY_CHANGE).asString() != "null"){
-                    change = info.get(KEY_CHANGE).asString();
-                    yearLow = info.get(KEY_YEAR_LOW).asString();
-                    yearHigh = info.get(KEY_YEAR_HIGH).asString();
-                    daysLow = info.get(KEY_DAYS_LOW).asString();
-                    daysHigh = info.get(KEY_DAYS_HIGH).asString();
-                    lastTradePriceOnly = info.get(KEY_LAST_TRADE_PRICE).asString();
-                } else {
-                    String empty_stub = getString(R.string.empty_value);
-                    change =  "0";
-                    yearLow = empty_stub;
-                    yearHigh = empty_stub;
-                    daysLow = empty_stub;
-                    daysHigh = empty_stub;
-                    lastTradePriceOnly = empty_stub;
-                }
+            if (info.get(KEY_CHANGE).asString() != "null"){
+                change = info.get(KEY_CHANGE).asString();
+                yearLow = info.get(KEY_YEAR_LOW).asString();
+                yearHigh = info.get(KEY_YEAR_HIGH).asString();
+                daysLow = info.get(KEY_DAYS_LOW).asString();
+                daysHigh = info.get(KEY_DAYS_HIGH).asString();
+                lastTradePriceOnly = info.get(KEY_LAST_TRADE_PRICE).asString();
+            } else {
+                String empty_stub = getString(R.string.empty_value);
+                change =  "0";
+                yearLow = empty_stub;
+                yearHigh = empty_stub;
+                daysLow = empty_stub;
+                daysHigh = empty_stub;
+                lastTradePriceOnly = empty_stub;
+            }
                 
             StockInfo stockInfo = new StockInfo(symbol, daysLow, daysHigh, yearLow, yearHigh,
                     name, lastTradePriceOnly, change, daysRange);

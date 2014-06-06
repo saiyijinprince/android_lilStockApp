@@ -10,8 +10,6 @@
             style="@style/StockListTextStyle"
             android:layout_width="fill_parent"
             android:layout_weight="1"
-			android:singleLine="true"
-            android:ellipsize="end"
             android:text="@string/empty_value" />
 		<TextView
             android:id="@+id/stockListPriceView"
@@ -48,6 +46,6 @@
             android:id="@+id/stockListCompanyView"
             android:text="@string/empty_value"
             android:singleLine="true"
-            android:ellipsize="end"
+        	android:ellipsize="end"
             style="@style/HeaderCompanyTextStyle"/>
 </LinearLayout>
